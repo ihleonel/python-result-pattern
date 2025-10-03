@@ -9,12 +9,6 @@ class User:
     email: str
 
     def __post_init__(self):
-        errors = self._validate_fields()
-
-        if errors:
-            raise ValueError(errors)
-
-    def _validate_fields(self) -> Dict[str, str]:
         errors = {}
 
         if self.id <= 0:
@@ -28,4 +22,6 @@ class User:
         elif "@" not in self.email:
             errors['email'] = "El campo 'email' debe tener un formato válido"
 
-        return errors
+        if errors:
+            raise ValueError(errors)
+
