@@ -39,7 +39,7 @@ class TestUpdateUser(unittest.TestCase):
         self.assertIsInstance(result, Error)
         self.assertTrue(result.is_error())
         self.assertFalse(result.is_success())
-        self.assertEqual(result.get_errors(), f"Invalid user ID: {user_id}")
+        self.assertEqual(result.get_value(), [f"Invalid user ID: {user_id}"])
 
 if __name__ == '__main__':
     unittest.main()

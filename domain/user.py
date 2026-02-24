@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 
 @dataclass(frozen=True)
@@ -9,7 +8,7 @@ class User:
     email: str
 
     def __post_init__(self):
-        errors = {}
+        errors: dict[str, str] = {}
 
         if self.id <= 0:
             errors['id'] = "El campo 'id' debe ser un número positivo"
