@@ -4,11 +4,11 @@ from typing import TypeVar, Generic, Union
 T = TypeVar('T')
 
 @dataclass
-class Success( Generic[T]):
+class Success(Generic[T]):
     value: T
 
 @dataclass
 class Error:
-    error: str
+    error: dict[str, str] | str
 
 Result = Union[Success[T], Error]
