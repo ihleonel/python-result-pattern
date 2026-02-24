@@ -1,19 +1,14 @@
-from abc import ABC, abstractmethod
-from typing import Any
+from dataclasses import dataclass
+from typing import TypeVar, Generic, Union
 
+T = TypeVar('T')
 
-class Result(ABC):
-    @abstractmethod
-    def is_success(self) -> bool:
-        """Retorna True si el resultado es exitoso."""
-        pass
+@dataclass
+class Success( Generic[T]):
+    value: T
 
-    @abstractmethod
-    def is_error(self) -> bool:
-        """Retorna True si el resultado es un error."""
-        pass
+@dataclass
+class Error:
+    error: str
 
-    @abstractmethod
-    def get_value(self) -> Any:
-        """Retorna el valor del resultado si es exitoso, o None si es un error."""
-        pass
+Result = Union[Success[T], Error]

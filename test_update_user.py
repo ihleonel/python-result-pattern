@@ -1,8 +1,7 @@
 import unittest
 from application.update_user import UpdateUser
-from success import Success
-from error import Error
 from domain.user import User
+from result import Error, Success
 from user_repository_fake import UserRepositoryFake
 
 
@@ -20,10 +19,9 @@ class TestUpdateUser(unittest.TestCase):
         result = self.update_user(user_id, name, email)
 
         self.assertIsInstance(result, Success)
-        self.assertTrue(result.is_success())
-        self.assertFalse(result.is_error())
+        assert isinstance(result, Success)
 
-        user = result.get_value()
+        user: User = result.value
         self.assertIsInstance(user, User)
         self.assertEqual(user.id, user_id)
         self.assertEqual(user.name, name)
@@ -35,11 +33,10 @@ class TestUpdateUser(unittest.TestCase):
         email = "juan@example.com"
 
         result = self.update_user(user_id, name, email)
+        assert isinstance(result, Error)
 
         self.assertIsInstance(result, Error)
-        self.assertTrue(result.is_error())
-        self.assertFalse(result.is_success())
-        self.assertEqual(result.get_value(), [f"Invalid user ID: {user_id}"])
+        self.assertEqual(result.error, f"Invalid user ID: {user_id}")
 
 if __name__ == '__main__':
     unittest.main()

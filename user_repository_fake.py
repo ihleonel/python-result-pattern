@@ -1,15 +1,13 @@
-from result import Result
-from success import Success
-from error import Error
+from result import Result, Error, Success
 from domain.user_repository import UserRepository
 from domain.user import User
 
 class UserRepositoryFake(UserRepository):
-    def get_by_id(self, user_id: int) -> Result:
+    def get_by_id(self, user_id: int) -> Result[User]:
         if user_id <= 0:
-            return Error([f"Invalid user ID: {user_id}"])
+            return Error(f"Invalid user ID: {user_id}")
 
         return Success(User(id=user_id, name="Juan Pérez", email="juan@example.com"))
 
-    def update(self, user: User) -> Result:
+    def update(self, user: User) -> Result[User]:
         return Success(user)
