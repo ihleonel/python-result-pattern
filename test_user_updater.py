@@ -73,6 +73,21 @@ class TestUserUpdater(unittest.TestCase):
         self.assertIn("email", errors)
         self.assertEqual(errors["email"], "Email is invalid")
 
+    def test_update_user_with_existing_email(self):
+        user_id = 1
+        name = "Juan Sanchez"
+        email = "carlos@example.com"
+
+        result = self.user_updater(user_id, name, email)
+
+        self.assertIsInstance(result, Error)
+        assert isinstance(result, Error)
+
+        errors = result.error
+        assert isinstance(errors, dict)
+        self.assertIn("email", errors)
+        self.assertEqual(errors["email"], "Email already exists")
+
 
 if __name__ == '__main__':
     unittest.main()
