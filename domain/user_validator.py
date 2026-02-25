@@ -1,5 +1,4 @@
 from typing import Optional
-from domain.user import User
 from result import Error, Success, Result
 
 
@@ -10,7 +9,7 @@ class UserValidator:
         id: Optional[int],
         name: str,
         email: str
-    ) -> Result[User]:
+    ) -> Result[None]:
         errors: dict[str, str] = {}
 
         if id is not None and id <= 0:
@@ -28,4 +27,4 @@ class UserValidator:
         if errors:
             return Error(errors)
 
-        return Success(User(id=id, name=name, email=email))
+        return Success(None)

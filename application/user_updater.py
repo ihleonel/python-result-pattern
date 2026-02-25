@@ -10,14 +10,12 @@ class UserUpdater:
         self.user_validator = user_validator
 
     def __call__(self, id: int, name: str, email: str) -> Result[User]:
-        result: Result[User] = self.user_validator.validate(id=id, name=name, email=email)
-        if isinstance(result, Error):
-            return result
+        validation_result: Result[None] = self.user_validator.validate(id=id, name=name, email=email)
+        if isinstance(validation_result, Error):
+            return validation_result
 
-        user: User = result.value
-
-        result: Result[User] = self.user_repository.save(
-            User(id=user.id, name=name, email=email)
+        save_result: Result[User] = self.user_repository.save(
+            User(id=id, name=name, email=email)
         )
 
-        return result
+        return save_result
