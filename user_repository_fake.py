@@ -11,3 +11,6 @@ class UserRepositoryFake(UserRepository):
 
     def save(self, user: User) -> Result[User]:
         return Success(user)
+
+    def find_by_email(self, email: str) -> Result[User]:
+        return Error(f"User with email {email} not found")

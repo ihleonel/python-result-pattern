@@ -10,7 +10,7 @@ class TestUserUpdater(unittest.TestCase):
 
     def setUp(self):
         self.user_repository = UserRepositoryFake()
-        self.user_validator = UserValidator()
+        self.user_validator = UserValidator(self.user_repository)
         self.user_updater = UserUpdater(self.user_repository, self.user_validator)
 
     def test_successful_user_update_with_valid_data(self):

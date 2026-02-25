@@ -1,11 +1,15 @@
 from typing import Optional
+from domain.user_repository import UserRepository
 from result import Error, Success, Result
 
 
 
 class UserValidator:
-    @staticmethod
+    def __init__(self, user_repository: UserRepository):
+        self.user_repository = user_repository
+
     def validate(
+        self,
         id: Optional[int],
         name: str,
         email: str
@@ -20,9 +24,10 @@ class UserValidator:
 
         if not email:
             errors["email"] = "Email is required"
-
-        if '@' not in email:
+        elif '@' not in email:
             errors["email"] = "Email is invalid"
+        elif isinstance(self.user_repository.find_by_email(email), Success):
+            errors["email"] = "Email already exists"
 
         if errors:
             return Error(errors)

@@ -10,3 +10,7 @@ class UserRepository(ABC):
     @abstractmethod
     def search(self, user_id: int) -> Result[User]:
         ...
+
+    @abstractmethod
+    def find_by_email(self, email: str) -> Result[User]:
+        ...

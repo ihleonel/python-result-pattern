@@ -14,3 +14,6 @@ class UserRepositoryMySql(UserRepository):
             return Success(User(id=1, name=user.name, email=user.email))
 
         return Success(user)
+
+    def find_by_email(self, email: str) -> Result[User]:
+        return Success(User(id=1, name="Juan Pérez", email=email))
