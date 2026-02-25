@@ -13,7 +13,7 @@ class UserRepositoryFake(UserRepository):
         for user in self.users:
             if user.id == user_id:
                 return Success(user)
-        return Error(f"User with ID {user_id} not found")
+        return Error({"user": f"User with ID {user_id} not found"})
 
     def save(self, user: User) -> Result[User]:
         for i, existing_user in enumerate(self.users):
@@ -28,4 +28,4 @@ class UserRepositoryFake(UserRepository):
         for user in self.users:
             if user.email == email:
                 return Success(user)
-        return Error(f"User with email {email} not found")
+        return Error({"email": f"User with email {email} not found"})

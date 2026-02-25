@@ -9,6 +9,6 @@ class Success(Generic[T]):
 
 @dataclass
 class Error:
-    error: dict[str, str] | str
+    error: dict[str, str]
 
 Result = Union[Success[T], Error]
