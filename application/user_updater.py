@@ -5,9 +5,9 @@ from result import Error, Result
 
 
 class UserUpdater:
-    def __init__(self, user_repository: UserRepository, user_validator: UserValidator):
+    def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
-        self.user_validator = user_validator
+        self.user_validator = UserValidator(user_repository)
 
     def __call__(self, id: int, name: str, email: str) -> Result[User]:
         validation_result: Result[None] = self.user_validator.validate(id=id, name=name, email=email)

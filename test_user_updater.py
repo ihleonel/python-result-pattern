@@ -1,7 +1,6 @@
 import unittest
 from application.user_updater import UserUpdater
 from domain.user import User
-from domain.user_validator import UserValidator
 from result import Error, Success
 from user_repository_fake import UserRepositoryFake
 
@@ -10,8 +9,7 @@ class TestUserUpdater(unittest.TestCase):
 
     def setUp(self):
         self.user_repository = UserRepositoryFake()
-        self.user_validator = UserValidator(self.user_repository)
-        self.user_updater = UserUpdater(self.user_repository, self.user_validator)
+        self.user_updater = UserUpdater(self.user_repository)
 
     def test_successful_user_update_with_valid_data(self):
         user_id = 1
